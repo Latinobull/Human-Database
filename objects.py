@@ -1,6 +1,5 @@
-from PyInquirer.utils import print_json
 from db import Database
-from PyInquirer import prompt
+from PyInquirer import prompt, Separator
 
 # Human needs name, job, age, salary, bills
 DB = Database()
@@ -104,10 +103,15 @@ def createHuman():
     DB.insert(name, age, job, salary, 0)
 
 
+def viewHuman():
+    for row in DB.view():
+        print(f"${row} \n ${Separator()}")
+
+
 # Add a Jobs, Taxes, Activities, Money
 # DJ = Human("DJ", 24, "Software Engineer", 0, 2000)
 # print(DJ.Tax(DJ.salary))
 # del DJ
 # print(Human.liveHumans())
 # print(Human.list())
-createHuman()
+viewHuman()
