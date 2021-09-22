@@ -27,6 +27,15 @@ class Database:
         )
         self.conn.commit()
 
+    def view(self):
+        self.cur.execute("SELECT * FROM human")
+        rows = self.cur.fetchall()
+        return rows
+
+    def delete(self, id):
+        self.cur.execute("DELETE FROM human WHERE id = %s", (id,))
+        self.conn.commit()
+
     def __del__(self):
         self.conn.close()
 
