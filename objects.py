@@ -1,3 +1,5 @@
+from prompt_toolkit.shortcuts import confirm
+from psycopg2 import connect
 from db import Database
 from PyInquirer import prompt, Separator
 
@@ -105,7 +107,44 @@ def createHuman():
 
 def viewHuman():
     for row in DB.view():
-        print(f"${row} \n ${Separator()}")
+        print(f"{row} \n {Separator()}")
+
+
+def deleteHuman():
+    choices = {}
+    for value, key in DB.viewName():
+        choices.setdefault(key, []).append(value)
+
+        # choices.append("".join(row))
+        print(choices)
+    deleteOptions = [
+        {
+            "type": "list",
+            "name": "delete",
+            "message": "Who do you want to delete?",
+            "choices": choices,
+        }
+    ]
+    answer = prompt(deleteOptions)
+    person = answer.get("delete")
+    print(person)
+    for i in choices.get(person):
+        index = i
+    print(index)
+    confirmation = [
+        {
+            "type": "confirm",
+            "name": "confirm",
+            "message": f"Are you sure you want to delete {person}?",
+        }
+    ]
+    answer = prompt(confirmation)
+    confirm = answer.get("confirm")
+    if confirm:
+        DB.delete(index)
+        print(f"You have removed {person} for the program")
+    else:
+        print("You have cancelled your deletion request")
 
 
 # Add a Jobs, Taxes, Activities, Money
@@ -114,4 +153,4 @@ def viewHuman():
 # del DJ
 # print(Human.liveHumans())
 # print(Human.list())
-viewHuman()
+deleteHuman()

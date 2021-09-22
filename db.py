@@ -32,6 +32,11 @@ class Database:
         rows = self.cur.fetchall()
         return rows
 
+    def viewName(self):
+        self.cur.execute("SELECT id, name FROM human")
+        rows = self.cur.fetchall()
+        return rows
+
     def delete(self, id):
         self.cur.execute("DELETE FROM human WHERE id = %s", (id,))
         self.conn.commit()
