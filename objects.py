@@ -1,5 +1,3 @@
-from prompt_toolkit.shortcuts import confirm
-from psycopg2 import connect
 from db import Database
 from PyInquirer import prompt, Separator
 
