@@ -43,7 +43,6 @@ class Activities:
 
 
 class Human(Bills, Activities):
-    livingHumans = 0
     listOfHumans = []
 
     def __init__(self, name, age, job, salary, bank) -> None:
@@ -57,19 +56,23 @@ class Human(Bills, Activities):
 
     @classmethod
     def liveHumans(cls):
-        return cls.livingHumans
+        for key, value in DB.viewName():
+            cls.listOfHumans.append(value)
+            livingHumans = len(cls.listOfHumans)
+        question = [
+            {
+                "type": "confirm",
+                "name": "confirm",
+                "message": f"You have {livingHumans} humans in your program. Would you like to show all their names?",
+            }
+        ]
+        answer = prompt(question)
+        confirm = answer.get("confirm")
+        if confirm:
+            return viewHuman()
 
-    @classmethod
-    def addHumans(cls):
-        cls.livingHumans += 1
-
-    @classmethod
-    def listHuman(cls, name):
-        cls.listOfHumans.append(name)
-
-    @classmethod
-    def list(cls):
-        return cls.listOfHumans
+        else:
+            return "Thank you for using Bull-line Technology."
 
     def mySalary(self):
         if self.salary > 0:
@@ -102,6 +105,7 @@ def createHuman():
     job = answer.get("job")
     salary = choices.get(job)
     print(job, salary)
+    Human(name, age, job, salary, 0)
     DB.insert(name, age, job, salary, 0)
 
 
@@ -151,6 +155,6 @@ def deleteHuman():
 # DJ = Human("DJ", 24, "Software Engineer", 0, 2000)
 # print(DJ.Tax(DJ.salary))
 # del DJ
-# print(Human.liveHumans())
-# print(Human.list())
-deleteHuman()
+
+# createHuman()
+Human.liveHumans()
