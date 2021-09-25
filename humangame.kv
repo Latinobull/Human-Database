@@ -1,20 +1,26 @@
-#:kivy 2.0
-GridLayout:
-    
-<GridLayout>:
+#:kivy 2.0    
+<Opening>:
     cols: 1
     Label:
-        text:'Welcome to the Simulation'
+        id: intro
+        text: app.intro
         pos_hint: {'center_x': .5}
         color: 255,220,0,1
         font_size: 32
+        canvas.before:
+            Color:
+                rgba: 1, .5, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    GridLayout:
+        cols:2
+        Label:
+            text:'Are you Ready to Enter?'
+            height:'100dp'
+            size_hint: 1,None
+        Button:
+            text: 'Click to enter'
+            height:'100dp'
+            size_hint: 1,None
 
-
-
-# <MainWidget>:
-#     Button:
-#         text: 'Hello World'
-#         size: '500dp', '100dp'
-#     Label:
-#         text:'Welcome to your Game'
-#         size:'500dp','100dp'
