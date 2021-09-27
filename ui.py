@@ -7,7 +7,6 @@ from kivy.uix.button import Button
 class Opening(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    #     b1 = Button(text='A')
     pass
 
 

@@ -1,28 +1,48 @@
 #:kivy 2.0    
+#:import utils kivy.utils
 <Opening>:
     cols: 1
     Label:
         id: intro
         text: app.intro
         pos_hint: {'center_x': .5}
-        color: 255,220,0,1
+        color: utils.get_color_from_hex('#27a849')
         font_size: 32
         canvas.before:
             Color:
-                rgba: 1, .5, 0, 1
+                rgba: 0,0,0,1
             Rectangle:
                 pos: self.pos
                 size: self.size
     TextInput:
-        
+        id: my_text_input
+        size_hint: 
+
     GridLayout:
         cols:2
+        row_force_default: True
+        row_default_height: 100
+        size_hint_y: None
+        height: self.minimum_height
         Label:
             text:'Are you Ready to Enter?'
-            height:'100dp'
-            size_hint: 1,None
         Button:
             text: 'Click to enter'
-            height:'100dp'
-            size_hint: 1,None
+    GridLayout:
+        cols:1
+        row_force_default: True
+        row_default_height: 60
+        size_hint_y: None
+        height: self.minimum_height
+        Label:
+            id:footer
+            text: 'Created with Bullish technology'
+            pos_hint: {'center_x': .5}
+            color: utils.get_color_from_hex('#27a849')
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex('#000000')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
